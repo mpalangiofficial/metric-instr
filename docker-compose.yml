@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  metric-instr:
+    image: ${DOCKER_REGISTRY-}metricinstr
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - prom-network
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - D:\Practices\dotnetmetric_examples\prometheus:/etc/prometheus
+    ports:
+      - 9090:9090
+    networks:
+      - prom-network
+networks:
+  prom-network:
+    name: prom-network
